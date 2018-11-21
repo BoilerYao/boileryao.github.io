@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Xiangyu Yao">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Xiangyu Yao">
+    
+    <meta name="keywords" content="hexo,boiler,boileryao">
+    
+    <meta name="description" content="勿苟安当下，勿忘前进之步伐">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>[译]一个人的 Android 开发 · 奔跑的锅炉</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >闭门造车姚师傅</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">[译]一个人的 Android 开发</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>闭门造车姚师傅</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            [译]一个人的 Android 开发
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Translation">Translation</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Career">Career</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2.7k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2017/04/03</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>一个人就是一个团队，作者就是这种情况。当周围没有一样一样的小伙伴，是好是坏，怎么才能更好地提升自己呢？作者经过实践给出了几条建议，使用 Kotlin，正面刚设计师的 iOS 设计稿，嗯！</p>
+<p><img class="progressiveMedia-noscript js-progressiveMedia-inner" src="https://cdn-images-1.medium.com/max/800/1*gqA2o9GN2tU2xaIMuddXJg.jpeg"></p>
+<p>Photo credit : <a href="http://www.magic4walls.com/crop-image?id=14269" target="_blank" rel="noopener">http://www.magic4walls.com/crop-image?id=14269</a> </p>
+<a id="more"></a>
+<blockquote>
+<ul>
+<li>原文地址：<a href="https://hackernoon.com/flying-solo-with-android-development-c52d911b62bf#.yhgjjtwz1" target="_blank" rel="noopener">Flying Solo with Android Development</a></li>
+<li>原文作者：<a href="https://hackernoon.com/@anitas3791?source=post_header_lockup" target="_blank" rel="noopener">Anita Singh</a></li>
+<li>译文出自：<a href="https://github.com/xitu/gold-miner" target="_blank" rel="noopener">掘金翻译计划</a></li>
+<li>译者：<a href="https://github.com/boileryao" target="_blank" rel="noopener">Boiler Yao</a></li>
+<li>校对者： <a href="https://github.com/gaozp" target="_blank" rel="noopener">gaozp</a> 、<a href="https://github.com/tanglie1993" target="_blank" rel="noopener">tanglie1993</a></li>
+</ul>
+</blockquote>
+<p>两年半之前，在一个由四个人组成的 Android 团队的帮助下，我开始从后端开发转向移动开发。一年之后，我加入了一个已经完成了B轮融资的初创公司，在那里主要做 Android 开发的工作。在一个小团队里工作，既能很好地保持独立，还不耽误向同事学习。</p>
+<p>但随后，五个月前，我从原本的小团队跳槽到了一个“根本没有团队”的地方，我去的这家是刚刚成立的创业公司，只有六个人，而我是其中 <strong>唯一的</strong> Android 工程师。在这个新的岗位，我从零开始完成了 <a href="https://winnie.com/" target="_blank" rel="noopener">Winnie</a>，这个 APP 最近已经<a href="https://winnie.com/android" target="_blank" rel="noopener">发布</a> 了！</p>
+<p>结果证明这是一个大飞跃。单飞一直是一个挑战，但它也带来了很多回报。一路走来，我发现独自工作是有利有弊的。不过最重要的是，你可以做一些事情来帮助自己走向成功。这里有一些目前为止已经帮到我的策略。</p>
+<h4 id="跟社区保持接触-业余不忘充电"><a href="#跟社区保持接触-业余不忘充电" class="headerlink" title="跟社区保持接触 业余不忘充电"></a><strong>跟社区保持接触 业余不忘充电</strong></h4><p>对单飞的担心之一是，我已经习惯了以前的角色，担心没有人能一起讨论新的想法并且给我出主意。</p>
+<p>好消息是有很多在线资源可以拓展你的知识和视野。 从 <a href="https://twitter.com/droidcon?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank" rel="noopener"><strong>DroidCon</strong></a> 、 <a href="http://360andev.com/" target="_blank" rel="noopener"><strong>360|AnDev</strong></a> 这样的开发者大会上的在线分享，到 <a href="http://fragmentedpodcast.com/" target="_blank" rel="noopener"><strong>Fragmented Podcast</strong></a> 、 <a href="https://www.youtube.com/channel/UCMEmNnHT69aZuaOrE-dF6ug/videos" target="_blank" rel="noopener"><strong>Android Dialogs</strong></a>  和 <a href="http://androidweekly.net/" target="_blank" rel="noopener"><strong>Android Weekly</strong></a> 这样的时效性很高的网站，你有很多方法来拓展自己的想法。</p>
+<p>我个人最喜欢的是 <a href="https://caster.io/" target="_blank" rel="noopener"><strong>Caster.io</strong></a> —— 代码示例加上简短的解说视频让我随时脉动回来！ 线下聚会或者 <a href="https://www.reddit.com/r/androiddev/" target="_blank" rel="noopener"><strong>AndroidDev subreddit</strong></a> 、 <a href="https://plus.google.com/communities/105153134372062985968" target="_blank" rel="noopener"><strong>Google+ communities</strong></a> , Slack groups 和 Twitter 这样的社区对于继续讨论和解疑释惑，都是很好的去处。</p>
+<h4 id="审查之前提交的代码-保持高标准"><a href="#审查之前提交的代码-保持高标准" class="headerlink" title="审查之前提交的代码 保持高标准"></a><strong>审查之前提交的代码 保持高标准</strong></h4><p>我特别建议打开提交记录来审查自己的代码。在自己的提交下评论可能看上去很傻，但是我认为如果你一个人工作的话，这是个很好的习惯。这一点在 <a href="https://www.youtube.com/watch?v=CtxBO9zq7vQ" target="_blank" rel="noopener">一个跟 Android 相关的对话节目系列</a> 中也有讨论。</p>
+<p>我用 GitHub 自带的预览功能完成第一步，之后把它放一边然后过一段时间再来查看。我尽全力来审查自己的提交，就像我审查同事的代码一样，来确保我用同样严格的标准要求自己。回过头看自己的代码还<strong>有助于发现 bug 和错误的边界情况处理，以及让你的代码保持统一和整洁。</strong></p>
+<h4 id="一个“不好的”模式通常比没有模式要好"><a href="#一个“不好的”模式通常比没有模式要好" class="headerlink" title="一个“不好的”模式通常比没有模式要好"></a><strong>一个“不好的”模式通常比没有模式要好</strong></h4><p>你不得不做出很多决定 —— 应该使用 <a href="https://upday.github.io/blog/model-view-viewmodel/" target="_blank" rel="noopener">MVVM</a> 、 <a href="https://medium.com/upday-devs/android-architecture-patterns-part-2-model-view-presenter-8a6faaae14a5#.vcztbt47h" target="_blank" rel="noopener">MVP</a> 、<a href="http://lgvalle.xyz/2015/08/04/flux-architecture/" target="_blank" rel="noopener">Flux</a>，还是其它的架构模式？使用 Fragment 还是 ViewGroup？哪些应该是抽象的而哪些不应该是？</p>
+<p>项目开始的时候，一开始的时候使用一种模式，之后意识到另一种模式更好，并由此带来一些模式的重构和去除并不是一件新鲜事。</p>
+<p>虽然在某些情况下打破你的模式是有意义的，但是当你发现更好的东西时，最好留心去重构并且改变之前的代码来使整体保持一致。这可能听起来很明显但是仅仅把新的模式用到新的代码中更为简单，所以当你一个人工作的时候可能会倾向这么干。但是这样会在你察觉到之前迅速让你的代码变得蜜汁混乱！<strong>即使这个模式并不是很棒，保持代码的一致性会让之后的修补变得更容易</strong>。</p>
+<h4 id="墙裂建议使用Kotlin"><a href="#墙裂建议使用Kotlin" class="headerlink" title="墙裂建议使用Kotlin"></a><strong>墙裂建议使用Kotlin</strong></h4><p>除非你是从头开始，不然的话，考虑一下在下一个你将要写的类里试试吧。</p>
+<p>我最终没有在 Winnie 中使用 <a href="https://kotlinlang.org/" target="_blank" rel="noopener">Kotlin</a> ，因为我当时没有经验所以对这个想法不够自信，加之不想打击团队中的 Java 后端工程师向代码库中贡献代码的热情。</p>
+<p>然而，在看过 <a href="https://www.youtube.com/watch?v=mDpnc45WwlI" target="_blank" rel="noopener">Christina的关于 Kotlin 的演讲</a>  并且做了一些研究之后，<strong>如果能重来，我至少会试试这门语言</strong>。 Kotlin 有很多优点 —— 即使只是防止 null pointer 引起的异常和不与 Java 笨拙的模式化代码同流合污（Kotlin 的语法比 Java 要精炼得多 —— 译注）就让我佩服得五体投地。 Jake Wharton 的 <a href="https://realm.io/news/oredev-jake-wharton-kotlin-advancing-android-dev/" target="_blank" rel="noopener">这个讲座</a> 是个很好的学习 Kotlin 的起点。</p>
+<h4 id="掌握自己的代码-不要过分依赖第三方库"><a href="#掌握自己的代码-不要过分依赖第三方库" class="headerlink" title="掌握自己的代码 不要过分依赖第三方库"></a><strong>掌握自己的代码 不要过分依赖第三方库</strong></h4><p>我记得在 MVP 中，曾经花费过很多时间选择一个库来用，因为这些库实在是太多了。被丰富的选择惯坏是个很大的问题，最终我自己造了个简单的轮子，用得很开心。</p>
+<p>当选择用哪个第三方库的时候，我建议考虑好你是否真的需要它以及它会对你未来的开发造成哪些限制 —— 它会为单元测试增加难度吗？它会限制使用 Android 自带的特性吗，比如多屏之间的过渡动画之类的？它的开发是不是仍然很热火朝天并且有很多 APP 使用它？这些考虑让我好好权衡并做出决定。</p>
+<p><strong>我建议在尽可能保留掌控的情况下去优化，而无须重新造轮子</strong> 虽然有个库已经几乎包含所有的东西了，但是自己去实现一些东西会更好。（使用第三方库的基础组件，自己根据需要进行组合。—— 译注）</p>
+<h4 id="规划好测试（Testing）和辅助功能（Accessibility）"><a href="#规划好测试（Testing）和辅助功能（Accessibility）" class="headerlink" title="规划好测试（Testing）和辅助功能（Accessibility）"></a><strong>规划好测试（Testing）和辅助功能（Accessibility）</strong></h4><p>如果你接手的项目是从头开始，那么你<strong>现在就可以去做了</strong>！不然的话，你可以在接下来你写的代码中这样做。</p>
+<p>面对张牙舞爪的 deadline，测试和辅助功能往往是下等公民。而你把一旦它们的优先级放得很低，由于没有其他人跟你分担，你就更难找到时间去实现它们了。</p>
+<p>我承认，我自己只是才开始做这方面的工作。但通过使用依赖注入，MVP 模式，只暴露 Model 对象的接口到 UI 等等方法来在脑海中写测试代码，来达到更容易测试的目标。从项目开始的时候，每次提交之后，我都会同时在 <a href="https://circleci.com/" target="_blank" rel="noopener"><strong>CircleCI</strong></a> （一个持续集成和发布的平台 —— 译注）上进行编译，以便进行简单的检查和运行测试。</p>
+<p><img class="progressiveMedia-noscript js-progressiveMedia-inner" src="https://cdn-images-1.medium.com/max/800/1*IlMGg4Voi3RcLi7sjVQP0g.gif"></p>
+<p>对于辅助功能（Accessibility），我在任何可以的时候都添加上内容描述，并且在发布前使用  <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.auditor&amp;hl=en" target="_blank" rel="noopener"><strong>Accessibility Scanner</strong></a> 来找出我接下来还需要做哪些这方面的工作。毫无疑问还有更多的工作要做，但这是个不错的开始。Kelly Schuster 的 <a href="https://realm.io/news/kelly-shuster-android-is-for-everyone/" target="_blank" rel="noopener">这个演讲</a> 给出了一些可行的建议使得开发者可以让自己的 APP 变得对有缺陷的人群更友好。</p>
+<p>如果时间不允许来编写测试，那就人工测试就很方便了。比如，在一个文档中为每一个特性写下不同的测试案例（正面的、反面的），确保在每次发布前进行这些测试。<strong>为自己定下编写测试和进行 Accessibility 改进的 deadline，不然你可能永远也完成不了它们</strong>。</p>
+<h4 id="告诉你的-iOS-设计师他们是错的-自己寻求到-Android-设计的转换"><a href="#告诉你的-iOS-设计师他们是错的-自己寻求到-Android-设计的转换" class="headerlink" title="告诉你的 iOS 设计师他们是错的 自己寻求到 Android 设计的转换 :-)."></a><strong>告诉你的 iOS 设计师他们是错的 自己寻求到 Android 设计的转换 :-).</strong></h4><p>不要因为支持你的平台上的正确的事情而担心！当你一个人干的时候，你有责任带着别人跟上最新的 Android UI 模式和代码库的发展速度。</p>
+<p>我工作中通常得到的是 iOS 系统上的截图，但是使用 <a href="https://material.io/guidelines/" target="_blank" rel="noopener">Material 设计规范</a> 和一些优秀 Android APP 作为资源来把那些设计转换到 Android 里面。还有，没有什么比引用官方的 Material Design 文档更适合来说服别人了！</p>
+<p><img class="progressiveMedia-noscript js-progressiveMedia-inner" src="https://cdn-images-1.medium.com/max/800/1*xFUdWXDI9s_aHY949_vZ8w.gif"></p>
+<p>至于代码库，在我的 CEO 来帮忙的几个月内，我向她普及了我们的架构和 MVP、Dagger2、RxJava2 之类的概念。我建议保持向周围的人进行 Android 概念的传教，因为<strong>向别人解释你的决定或者教给他们一个新的概念帮助你真正得掌握这个概念，有时还会让你意识到自己的错误。</strong></p>
+<h4 id="尽早发布-beta-版"><a href="#尽早发布-beta-版" class="headerlink" title="尽早发布 beta 版"></a>尽早发布 beta 版</h4><p>如果你的 APP 还没有上线或者在现有的基础上进行了重大的变化，这条会很适用。Google play 有一个 <a href="https://support.google.com/googleplay/android-developer/answer/3131213?hl=en" target="_blank" rel="noopener">alpha 和 beta 频道</a>，在 beta 频道，你可以自由开关你的 beta 版本。</p>
+<p>如果你在继续开发一个已经存在的 APP，你仍然可以平行地发布 beta 版，只要版本比当前的正式版高就好了。如果是开放的 beta 版，用户将可以通过在 play store 安装或者点击一些链接下载安装来使用。如果你要对变化进行小规模的测试， <a href="https://support.google.com/googleplay/android-developer/answer/6346149?hl=en" target="_blank" rel="noopener">staged-rollouts</a> 将会是个很合适的选择。</p>
+<p>如果你在开发一个崭新的 APP，我建议<strong>在上架前尽快开发出内测版，然后在这个内测版准备好了的时候把它转为开放的公测版。</strong> 我们的第一个内测版只有很少的几个功能，但是它帮助我们及早发现了 bug，步入了周期性发布的正轨，并且获得了很有价值的反馈。这也让我们毫无压力并且可以平稳上线。</p>
+<hr>
+<p>第一次单飞是个很好的学习经历，因为你<strong>挑战自我</strong>了，这是之前从未有过的。 你变得更加依赖自己、锻炼了对代码库的整体控制（或好或坏）、学习了更多自己喜欢的东西并且处理怪不得别人的错误（耶）。我曾经担心单飞，但是在上面的建议的帮助下，结果是一个很好玩的经历。我希望这些建议同样会对你有所帮助。</p>
+<p>打算单飞或者和分享你的单飞经历？很高兴听到你们的声音。在原文下面评论或者 ❤ 这篇文章 或者到 <a href="https://twitter.com/anitas3791" target="_blank" rel="noopener">Twitter</a>上来找我。</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://blog.boileryao.com">Xiangyu Yao</a>
+            <p>原文链接：<a href="http://blog.boileryao.com/2017/04/flying-solo-with-android-development/">http://blog.boileryao.com/2017/04/flying-solo-with-android-development/</a>
+            <p>发表日期：<a href="http://blog.boileryao.com/2017/04/flying-solo-with-android-development/">April 3rd 2017, 12:00:00 am</a>
+            <p>更新日期：<a href="http://blog.boileryao.com/2017/04/flying-solo-with-android-development/">November 20th 2018, 11:35:23 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/04/rxjava2-java8-wtf/" title= "[译] 大战 RxJava2 和 Java8 Stream [ Android RxJava2 ] （这到底是什么） 第四部分">
+                    <div class="nextTitle">[译] 大战 RxJava2 和 Java8 Stream [ Android RxJava2 ] （这到底是什么） 第四部分</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/03/android-ipc-service-messsenger/" title= "Android IPC之 Service和Messenger">
+                    <div class="prevTitle">Android IPC之 Service和Messenger</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "tbNcKzv5LFi1kz9g4YffERjA-gzGzoHsz",
+        appKey: "FMP9ubOFve88nYzy4lcpfP7G",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:boileryao+blog@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/boileryao" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://t.me/boileryao" class="iconfont-archer telegram" target="_blank" title=telegram></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://juejin.im/user/57528b53816dfa005f6a458f" class="iconfont-archer juejin" target="_blank" title=juejin></a>
+            
+        
+    
+        
+            
+                <a href="https://www.v2ex.com/member/boileryao" class="iconfont-archer v2ex" target="_blank" title=v2ex></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#跟社区保持接触-业余不忘充电"><span class="toc-number">1.</span> <span class="toc-text">跟社区保持接触 业余不忘充电</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#审查之前提交的代码-保持高标准"><span class="toc-number">2.</span> <span class="toc-text">审查之前提交的代码 保持高标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一个“不好的”模式通常比没有模式要好"><span class="toc-number">3.</span> <span class="toc-text">一个“不好的”模式通常比没有模式要好</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#墙裂建议使用Kotlin"><span class="toc-number">4.</span> <span class="toc-text">墙裂建议使用Kotlin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#掌握自己的代码-不要过分依赖第三方库"><span class="toc-number">5.</span> <span class="toc-text">掌握自己的代码 不要过分依赖第三方库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#规划好测试（Testing）和辅助功能（Accessibility）"><span class="toc-number">6.</span> <span class="toc-text">规划好测试（Testing）和辅助功能（Accessibility）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#告诉你的-iOS-设计师他们是错的-自己寻求到-Android-设计的转换"><span class="toc-number">7.</span> <span class="toc-text">告诉你的 iOS 设计师他们是错的 自己寻求到 Android 设计的转换 :-).</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#尽早发布-beta-版"><span class="toc-number">8.</span> <span class="toc-text">尽早发布 beta 版</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href= "/2018/02/eventbus-doc-cn/" >EventBus 中文文档</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/03</span><a class="archive-post-title" href= "/2018/02/retrofit-structure/" >Retrofit 源码分析：代码结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2018/02/retrofit-annotations/" >Retrofit源码分析：注解部分</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2017/11/viewmodel-livedata-pattens-and-antipatterns/" >ViewModel 和 LiveData：为设计模式打 Call 还是唱反调？</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2017/10/covariance-and-contravariance-in-kotlin/" >Covariance and Contravariance in Kotlin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2017/08/git-rebase/" >Git 中的 rebase, 变基！</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2017/06/design-pattern-kotlin/" >[译] 当设计模式遇上 Kotlin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/27</span><a class="archive-post-title" href= "/2017/05/poly-constructor/" >Polymorphism, the perspective of construct</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/17</span><a class="archive-post-title" href= "/2017/04/rxjava2-java8-wtf/" >[译] 大战 RxJava2 和 Java8 Stream [ Android RxJava2 ] （这到底是什么） 第四部分</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/03</span><a class="archive-post-title" href= "/2017/04/flying-solo-with-android-development/" >[译]一个人的 Android 开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/android-ipc-service-messsenger/" >Android IPC之 Service和Messenger</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/hackers-and-painters-log/" >黑客与画家，Big Ideas from the Computer Age</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href= "/2017/03/hamming-weight/" >Hamming Weight, 一个串中非零元素的个数</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2016/10/semitranslate-android-sharing-simple/" >[意译] Android-分享一些简单的数据</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/21</span><a class="archive-post-title" href= "/2016/06/toast-full-detail/" >Android Toast 详细使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2016/04/using-retrofit-querying-ip-from-taobao/" >使用Retrofit和淘宝IP地址库查询IP</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
+    
+        <span class="sidebar-tag-name" data-tags="IPC"><span class="iconfont-archer">&#xe606;</span>IPC</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Open Source"><span class="iconfont-archer">&#xe606;</span>Open Source</span>
+    
+        <span class="sidebar-tag-name" data-tags="Doc"><span class="iconfont-archer">&#xe606;</span>Doc</span>
+    
+        <span class="sidebar-tag-name" data-tags="Translation"><span class="iconfont-archer">&#xe606;</span>Translation</span>
+    
+        <span class="sidebar-tag-name" data-tags="Software Engineering"><span class="iconfont-archer">&#xe606;</span>Software Engineering</span>
+    
+        <span class="sidebar-tag-name" data-tags="VCS"><span class="iconfont-archer">&#xe606;</span>VCS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Career"><span class="iconfont-archer">&#xe606;</span>Career</span>
+    
+        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="Networking"><span class="iconfont-archer">&#xe606;</span>Networking</span>
+    
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+    
+        <span class="sidebar-tag-name" data-tags="Widgets"><span class="iconfont-archer">&#xe606;</span>Widgets</span>
+    
+        <span class="sidebar-tag-name" data-tags="Rx"><span class="iconfont-archer">&#xe606;</span>Rx</span>
+    
+        <span class="sidebar-tag-name" data-tags="ABC"><span class="iconfont-archer">&#xe606;</span>ABC</span>
+    
+        <span class="sidebar-tag-name" data-tags="Arch"><span class="iconfont-archer">&#xe606;</span>Arch</span>
+    
+        <span class="sidebar-tag-name" data-tags="Kotlin"><span class="iconfont-archer">&#xe606;</span>Kotlin</span>
+    
+        <span class="sidebar-tag-name" data-tags="Programming Language"><span class="iconfont-archer">&#xe606;</span>Programming Language</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Xiangyu Yao"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
