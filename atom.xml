@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>奔跑的锅炉</title>
+  
+  <subtitle>走一步，再走一步</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.boileryao.com/"/>
+  <updated>2018-11-20T15:35:06.803Z</updated>
+  <id>http://blog.boileryao.com/</id>
+  
+  <author>
+    <name>Xiangyu Yao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>EventBus 中文文档</title>
+    <link href="http://blog.boileryao.com/2018/02/eventbus-doc-cn/"/>
+    <id>http://blog.boileryao.com/2018/02/eventbus-doc-cn/</id>
+    <published>2018-02-08T13:55:55.000Z</published>
+    <updated>2018-11-20T15:35:06.803Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;野生 EventBus 文档！闲来无事翻了下，感觉很神奇&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Open Source" scheme="http://blog.boileryao.com/tags/Open-Source/"/>
+    
+      <category term="Doc" scheme="http://blog.boileryao.com/tags/Doc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Retrofit 源码分析：代码结构</title>
+    <link href="http://blog.boileryao.com/2018/02/retrofit-structure/"/>
+    <id>http://blog.boileryao.com/2018/02/retrofit-structure/</id>
+    <published>2018-02-03T04:10:13.000Z</published>
+    <updated>2018-11-21T02:23:14.234Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好的代码是自解释的，Retrofit 可以算是好的代码了。&lt;/p&gt;
+&lt;p&gt;Retrofit 的依赖图&lt;br&gt;&lt;img src=&quot;/2018/02/retrofit-structure/retrofit_layout_graph.png&quot; alt=&quot;Retrofit 的依赖图&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Open Source" scheme="http://blog.boileryao.com/tags/Open-Source/"/>
+    
+      <category term="Networking" scheme="http://blog.boileryao.com/tags/Networking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Retrofit源码分析：注解部分</title>
+    <link href="http://blog.boileryao.com/2018/02/retrofit-annotations/"/>
+    <id>http://blog.boileryao.com/2018/02/retrofit-annotations/</id>
+    <published>2018-02-02T11:55:35.000Z</published>
+    <updated>2018-11-20T15:37:34.805Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Retrofit 中的注解定义在 &lt;code&gt;retrofit.http&lt;/code&gt; 包下，包含了 Retrofit 用到的注解。主要分为两类，HTTP请求注解（针对函数）和参数注解（针对参数）。&lt;/p&gt;
+&lt;p&gt;本文对各种注解的用法做了个简单的介绍。&lt;/p&gt;
+&lt;p&gt;This post includes a simple introduction to retrofit annotations and some concise example. &lt;/p&gt;
+&lt;p&gt;// 上一行是为了谷歌爸爸的 SEO （ 逃&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Open Source" scheme="http://blog.boileryao.com/tags/Open-Source/"/>
+    
+      <category term="Networking" scheme="http://blog.boileryao.com/tags/Networking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ViewModel 和 LiveData：为设计模式打 Call 还是唱反调？</title>
+    <link href="http://blog.boileryao.com/2017/11/viewmodel-livedata-pattens-and-antipatterns/"/>
+    <id>http://blog.boileryao.com/2017/11/viewmodel-livedata-pattens-and-antipatterns/</id>
+    <published>2017-11-09T04:17:35.000Z</published>
+    <updated>2018-11-20T15:40:08.056Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Google 在今年（2017年）的 IO 大会上发布了 Android Architecture Component ，其中的 ViewModel 、LiveData 和 Room 等等都让人眼前一亮。本文介绍了 ViewModel 和 LiveData 对现有的 Android APP 架构和设计模式可能带来的一些利弊。大概算是阳春白雪吧，orz，orz，orz&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Translation" scheme="http://blog.boileryao.com/tags/Translation/"/>
+    
+      <category term="Arch" scheme="http://blog.boileryao.com/tags/Arch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Covariance and Contravariance in Kotlin</title>
+    <link href="http://blog.boileryao.com/2017/10/covariance-and-contravariance-in-kotlin/"/>
+    <id>http://blog.boileryao.com/2017/10/covariance-and-contravariance-in-kotlin/</id>
+    <published>2017-10-27T12:21:11.000Z</published>
+    <updated>2018-11-20T15:32:42.906Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;What is the hell of invariance, covariance and contravariance in Kotlin , and why this happen. It’s also helpful for understanding wildcast in Java.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Kotlin" scheme="http://blog.boileryao.com/tags/Kotlin/"/>
+    
+      <category term="Programming Language" scheme="http://blog.boileryao.com/tags/Programming-Language/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git 中的 rebase, 变基！</title>
+    <link href="http://blog.boileryao.com/2017/08/git-rebase/"/>
+    <id>http://blog.boileryao.com/2017/08/git-rebase/</id>
+    <published>2017-08-29T15:29:14.000Z</published>
+    <updated>2018-11-21T02:20:38.360Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Rebase, what is rebase and what advantage can we take using rebase before merge than merging directly. Read more for details. These contents come from &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Branching-Rebasing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;a part of &lt;strong&gt;&lt;em&gt;pro-git&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;, and you can get the entire book from links in this link.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="VCS" scheme="http://blog.boileryao.com/tags/VCS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[译] 当设计模式遇上 Kotlin</title>
+    <link href="http://blog.boileryao.com/2017/06/design-pattern-kotlin/"/>
+    <id>http://blog.boileryao.com/2017/06/design-pattern-kotlin/</id>
+    <published>2017-06-22T11:43:32.000Z</published>
+    <updated>2018-11-20T15:34:40.150Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;设计模式进行时，Kotlin。&lt;/p&gt;
+&lt;p&gt;设计模式本来就是构造了一些编程语言不原生支持的范式，作为一个年轻的语言，这些苦 Java 久矣的开发者做了些啥呢。&lt;a href=&quot;https://juejin.im/post/594b2ac00ce4630057425bd5&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Translation" scheme="http://blog.boileryao.com/tags/Translation/"/>
+    
+      <category term="Software Engineering" scheme="http://blog.boileryao.com/tags/Software-Engineering/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Polymorphism, the perspective of construct</title>
+    <link href="http://blog.boileryao.com/2017/05/poly-constructor/"/>
+    <id>http://blog.boileryao.com/2017/05/poly-constructor/</id>
+    <published>2017-05-27T12:42:07.000Z</published>
+    <updated>2018-11-20T15:37:10.176Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;When polymorphism meet initialization of an object, what will happen.&lt;/p&gt;
+&lt;p&gt;Here is a pretty strange but reasonable example.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://blog.boileryao.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[译] 大战 RxJava2 和 Java8 Stream [ Android RxJava2 ] （这到底是什么） 第四部分</title>
+    <link href="http://blog.boileryao.com/2017/04/rxjava2-java8-wtf/"/>
+    <id>http://blog.boileryao.com/2017/04/rxjava2-java8-wtf/</id>
+    <published>2017-04-17T13:37:02.000Z</published>
+    <updated>2018-11-20T15:38:37.373Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习函数式编程的一系列文章，这是第四部分，其他部分文内有链接。&lt;/p&gt;
+&lt;p&gt;怎么说呢，翻这篇的时候真的很痛苦，作者的表达很 America ，而且很俏皮和“详细”。当时我还是有些侧重直译的，然后就很尴尬。不过整篇文章还是很好明白的，map/filter 的概念讲得很清晰，很适合入门。&lt;a href=&quot;https://juejin.im/post/58f44a705c497d006c95436b&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;链接&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Translation" scheme="http://blog.boileryao.com/tags/Translation/"/>
+    
+      <category term="Rx" scheme="http://blog.boileryao.com/tags/Rx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[译]一个人的 Android 开发</title>
+    <link href="http://blog.boileryao.com/2017/04/flying-solo-with-android-development/"/>
+    <id>http://blog.boileryao.com/2017/04/flying-solo-with-android-development/</id>
+    <published>2017-04-02T16:00:00.000Z</published>
+    <updated>2018-11-20T15:35:23.797Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个人就是一个团队，作者就是这种情况。当周围没有一样一样的小伙伴，是好是坏，怎么才能更好地提升自己呢？作者经过实践给出了几条建议，使用 Kotlin，正面刚设计师的 iOS 设计稿，嗯！&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;progressiveMedia-noscript js-progressiveMedia-inner&quot; src=&quot;https://cdn-images-1.medium.com/max/800/1*gqA2o9GN2tU2xaIMuddXJg.jpeg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Photo credit : &lt;a href=&quot;http://www.magic4walls.com/crop-image?id=14269&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.magic4walls.com/crop-image?id=14269&lt;/a&gt; &lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Translation" scheme="http://blog.boileryao.com/tags/Translation/"/>
+    
+      <category term="Career" scheme="http://blog.boileryao.com/tags/Career/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android IPC之 Service和Messenger</title>
+    <link href="http://blog.boileryao.com/2017/03/android-ipc-service-messsenger/"/>
+    <id>http://blog.boileryao.com/2017/03/android-ipc-service-messsenger/</id>
+    <published>2017-03-12T14:27:31.000Z</published>
+    <updated>2018-11-21T02:18:50.173Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;IPC机制是Android的重要组成部分，本文介绍其中的Service和Messenger。结合模拟的支付调用作为例子，翔实明了，简直不能再良心。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://blog.boileryao.com/tags/Android/"/>
+    
+      <category term="IPC" scheme="http://blog.boileryao.com/tags/IPC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑客与画家，Big Ideas from the Computer Age</title>
+    <link href="http://blog.boileryao.com/2017/03/hackers-and-painters-log/"/>
+    <id>http://blog.boileryao.com/2017/03/hackers-and-painters-log/</id>
+    <published>2017-03-08T22:09:36.000Z</published>
+    <updated>2018-11-20T15:35:47.277Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如何好奇地探索这个世界，做喜欢的事情。不讲细节不摆资历不讲大道理不写小说不吹牛。(阳志平@豆瓣)&lt;/p&gt;
+&lt;p&gt;Hackers and Painters, Big Ideas from the Computer Age&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Reading" scheme="http://blog.boileryao.com/tags/Reading/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hamming Weight, 一个串中非零元素的个数</title>
+    <link href="http://blog.boileryao.com/2017/03/hamming-weight/"/>
+    <id>http://blog.boileryao.com/2017/03/hamming-weight/</id>
+    <published>2017-03-04T11:09:02.000Z</published>
+    <updated>2017-10-27T12:22:58.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;汉明重量是一串符号中非零符号的个数，在最为常见的数据位符号串中，它是1的个数。&lt;/p&gt;
+&lt;p&gt;操作简单，贴近底层，在包括信息论、编码理论、密码学等多个领域都有应用。&lt;/p&gt;
+&lt;p&gt;Java中有Integer.bitCount()的实现。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://blog.boileryao.com/tags/Algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[意译] Android-分享一些简单的数据</title>
+    <link href="http://blog.boileryao.com/2016/10/semitranslate-android-sharing-simple/"/>
+    <id>http://blog.boileryao.com/2016/10/semitranslate-android-sharing-simple/</id>
+    <published>2016-10-22T09:22:17.000Z</published>
+    <updated>2018-11-20T15:39:12.877Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;原文地址：&lt;a href=&quot;https://developer.android.com/training/sharing/send.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Sending Simple Data to Other Apps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​    当你建立一个Intent的时候，你必须指定这个Intent可以触发的Action。Android定义了一些Action，包括&lt;em&gt;ACTION_SEND&lt;/em&gt;，就像它的字面意思，这个Intent是从当前Activity发送数据到另一个Activity，甚至是别的进程的里的Activity。如果想在Activity之间传送数据的话，你需要做的仅仅是指定&lt;em&gt;数据&lt;/em&gt;以及它的&lt;em&gt;类型&lt;/em&gt;。系统就会寻找可以接收的Activity，并且直接启动这个Activity，如果有很多个Activity都被认为可以处理这些数据，系统则显示一个包含这些Activity的列表。同样，你也可以在manifest文件中声明你的Activity可以从其他应用中接收什么数据。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://blog.boileryao.com/tags/Android/"/>
+    
+      <category term="Doc" scheme="http://blog.boileryao.com/tags/Doc/"/>
+    
+  </entry>
+  
+</feed>
