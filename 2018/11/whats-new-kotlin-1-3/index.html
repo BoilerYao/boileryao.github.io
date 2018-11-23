@@ -412,7 +412,7 @@ height:50vh;
 <p>但是，这个检查比较粗糙（或者说由于性能等方面的考量，难以做得细致），一旦我们把这些检查放到单独的函数，智能转型就会失效：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">foo</span><span class="params">(str: <span class="type">String</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.isNotNull()) &#123;</span><br><span class="line">        str.length  <span class="comment">// not allowed</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> String?.<span class="title">isNotNull</span><span class="params">()</span></span> = <span class="keyword">this</span> != <span class="literal">null</span></span><br></pre></td></tr></table></figure>
 <p>所以，引入了 contract，这样重写 <code>String?.isNotNull()</code> 就好了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@ExperimentalContracts</span><br><span class="line">fun String?.isNotNull(): Boolean &#123;</span><br><span class="line">    contract &#123;</span><br><span class="line">        returns(true) implies(this@isNotNull != null)</span><br><span class="line">    &#125;</span><br><span class="line">    return this != null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExperimentalContracts</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> String?.<span class="title">isNotNull</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    contract &#123;</span><br><span class="line">        returns(<span class="literal">true</span>) implies(<span class="keyword">this</span><span class="symbol">@isNotNull</span> != <span class="literal">null</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> != <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="标准库中的-contract"><a href="#标准库中的-contract" class="headerlink" title="标准库中的 contract"></a>标准库中的 contract</h2><p>Kotlin <code>stdlib</code> 已经在使用 contract 了，比如这种（Strings.kt:218）：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns `true` if this nullable char sequence is either `null` or empty.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@kotlin</span>.<span class="keyword">internal</span>.InlineOnly</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> CharSequence?.<span class="title">isNullOrEmpty</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    contract &#123;</span><br><span class="line">        returns(<span class="literal">false</span>) implies (<span class="keyword">this</span><span class="symbol">@isNullOrEmpty</span> != <span class="literal">null</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> == <span class="literal">null</span> || <span class="keyword">this</span>.length == <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="自定义-contract"><a href="#自定义-contract" class="headerlink" title="自定义 contract"></a>自定义 contract</h2><blockquote>
@@ -474,7 +474,7 @@ height:50vh;
             <p>原文作者：<a href="http://blog.boileryao.com">Xiangyu Yao</a>
             <p>原文链接：<a href="http://blog.boileryao.com/2018/11/whats-new-kotlin-1-3/">http://blog.boileryao.com/2018/11/whats-new-kotlin-1-3/</a>
             <p>发表日期：<a href="http://blog.boileryao.com/2018/11/whats-new-kotlin-1-3/">November 22nd 2018, 10:58:23 am</a>
-            <p>更新日期：<a href="http://blog.boileryao.com/2018/11/whats-new-kotlin-1-3/">November 23rd 2018, 1:14:39 am</a>
+            <p>更新日期：<a href="http://blog.boileryao.com/2018/11/whats-new-kotlin-1-3/">November 23rd 2018, 11:09:18 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -807,6 +807,10 @@ top:50vh;
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 15
@@ -921,35 +925,35 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Translation"><span class="iconfont-archer">&#xe606;</span>Translation</span>
+        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
     
-        <span class="sidebar-tag-name" data-tags="Software Engineering"><span class="iconfont-archer">&#xe606;</span>Software Engineering</span>
+        <span class="sidebar-tag-name" data-tags="IPC"><span class="iconfont-archer">&#xe606;</span>IPC</span>
     
         <span class="sidebar-tag-name" data-tags="Kotlin"><span class="iconfont-archer">&#xe606;</span>Kotlin</span>
     
         <span class="sidebar-tag-name" data-tags="Programming Language"><span class="iconfont-archer">&#xe606;</span>Programming Language</span>
     
-        <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
-    
-        <span class="sidebar-tag-name" data-tags="IPC"><span class="iconfont-archer">&#xe606;</span>IPC</span>
-    
         <span class="sidebar-tag-name" data-tags="Open Source"><span class="iconfont-archer">&#xe606;</span>Open Source</span>
     
         <span class="sidebar-tag-name" data-tags="Doc"><span class="iconfont-archer">&#xe606;</span>Doc</span>
     
-        <span class="sidebar-tag-name" data-tags="VCS"><span class="iconfont-archer">&#xe606;</span>VCS</span>
+        <span class="sidebar-tag-name" data-tags="Translation"><span class="iconfont-archer">&#xe606;</span>Translation</span>
     
-        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+        <span class="sidebar-tag-name" data-tags="Software Engineering"><span class="iconfont-archer">&#xe606;</span>Software Engineering</span>
+    
+        <span class="sidebar-tag-name" data-tags="VCS"><span class="iconfont-archer">&#xe606;</span>VCS</span>
     
         <span class="sidebar-tag-name" data-tags="Career"><span class="iconfont-archer">&#xe606;</span>Career</span>
     
-        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
+        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
         <span class="sidebar-tag-name" data-tags="Networking"><span class="iconfont-archer">&#xe606;</span>Networking</span>
     
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
         <span class="sidebar-tag-name" data-tags="Rx"><span class="iconfont-archer">&#xe606;</span>Rx</span>
     
-        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
+        <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="Arch"><span class="iconfont-archer">&#xe606;</span>Arch</span>
     
