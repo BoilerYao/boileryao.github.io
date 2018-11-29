@@ -346,57 +346,26 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/eventbus-doc-cn/" >
+        <a class="abstract-title" href = "/2018/11/java-encoding-and-whats-codepoint/" >
             
-                <span>EventBus 中文文档</span>
+                <span>Java 中的字符编码 &amp; CodePoint</span>
         </a>
         <div class="abstract-content">
-            <p>野生 EventBus 文档！闲来无事翻了下，感觉很神奇<br></p>
+            编码的基本概念字符编码与解码是什么？计算机自己能理解的“语言”是二进制数，最小的信息标识是二进制位，8个二进制位表示一个字节；而我们人类所能理解的语言文字则是一套由英文字母、汉语汉字、标点符号字符、阿拉伯数字等等很多的字符构成的字符集。如果要让计算机来按照人类的意愿进行工作，则必须把人类所使用的这些字符集转换为计算机所能理解的二级制码，这个过程就是编码，他的逆过程称为解码。
+ASCII到Unicode的演进过程计算机最开始在美国被发明使用，需要编码的字符集并不是很大，无外乎英文字母、数字和一些简单的标点符号，因此采用了一种单字节编码系统。在这套编码规则中，人们将所需字符集中的字符一一映射...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/08</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/27</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Open Source">Open Source</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Doc">Doc</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2016/10/semitranslate-android-sharing-simple/" >
-            
-                <span>[意译] Android-分享一些简单的数据</span>
-        </a>
-        <div class="abstract-content">
-            <p>原文地址：<a href="https://developer.android.com/training/sharing/send.html" target="_blank" rel="noopener">Sending Simple Data to Other Apps</a></p>
-<p>​    当你建立一个Intent的时候，你必须指定这个Intent可以触发的Action。Android定义了一些Action，包括<em>ACTION_SEND</em>，就像它的字面意思，这个Intent是从当前Activity发送数据到另一个Activity，甚至是别的进程的里的Activity。如果想在Activity之间传送数据的话，你需要做的仅仅是指定<em>数据</em>以及它的<em>类型</em>。系统就会寻找可以接收的Activity，并且直接启动这个Activity，如果有很多个Activity都被认为可以处理这些数据，系统则显示一个包含这些Activity的列表。同样，你也可以在manifest文件中声明你的Activity可以从其他应用中接收什么数据。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/10/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Doc">Doc</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Encoding">Encoding</a>
     
 </div>
             

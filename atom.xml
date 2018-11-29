@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.boileryao.com/"/>
-  <updated>2018-11-23T03:09:18.129Z</updated>
+  <updated>2018-11-29T06:43:34.980Z</updated>
   <id>http://blog.boileryao.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java 中的字符编码 &amp; CodePoint</title>
+    <link href="http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/"/>
+    <id>http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/</id>
+    <published>2018-11-27T02:35:44.000Z</published>
+    <updated>2018-11-29T06:43:34.980Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;编码的基本概念&quot;&gt;&lt;a href=&quot;#编码的基本概念&quot; class=&quot;headerlink&quot; title=&quot;编码的基本概念&quot;&gt;&lt;/a&gt;编码的基本概念&lt;/h1&gt;&lt;h2 id=&quot;字符编码与解码是什么？&quot;&gt;&lt;a href=&quot;#字符编码与解码是什么？&quot; class=&quot;he
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://blog.boileryao.com/tags/Java/"/>
+    
+      <category term="Encoding" scheme="http://blog.boileryao.com/tags/Encoding/"/>
+    
+  </entry>
   
   <entry>
     <title>Kotlin 1.3 都更新了些啥</title>
@@ -313,9 +336,9 @@
     </summary>
     
     
-      <category term="Android" scheme="http://blog.boileryao.com/tags/Android/"/>
-    
       <category term="Doc" scheme="http://blog.boileryao.com/tags/Doc/"/>
+    
+      <category term="Android" scheme="http://blog.boileryao.com/tags/Android/"/>
     
   </entry>
   
