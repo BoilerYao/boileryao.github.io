@@ -439,7 +439,7 @@ height:50vh;
 <p>第一版  Unicode 发布于 1991年，略晚于  Java 项目启动。在第一版 Unicode 设计中， 16 位 （两字节） 被认为足够用来表达世界上所有字符，后来才发现不够用。在 1996 年发布的 Unicode 2.0，不再限制字符代码（code point）为 16位（现在的 Unicode 实际为 32位）。但是 Java 已经在 1995 年发布了，所以 JVM 内部还是沿用 UTF-16。</p>
 </blockquote>
 <p>为了保持兼容，<code>CONSTANT_Unicode_info</code> 这个结构体一直被保存下来。一般情况下现代虚拟机默认使用 <code>CONSTANT_Utf8_info</code> 。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_Unicode_info &#123;</span><br><span class="line">	u1	tag;</span><br><span class="line">	u2	length;</span><br><span class="line">	u2	bytes[length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_Unicode_info &#123;</span><br><span class="line">	u1	tag;</span><br><span class="line">	u2	length;</span><br><span class="line">	u2	bytes[length];</span><br><span class="line">&#125;</span><br><span class="line">CONSTANT_Utf8_info &#123;</span><br><span class="line">    u1 tag;</span><br><span class="line">    u2 length;</span><br><span class="line">    u1 bytes[length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>同理： JDK 5 编译的字节码可以在 Java 5+ 版本运行，这是向前兼容。</p>
 <p>因此，对于Java来说。低版本的 JDK 编译的字节码可以在高版本虚拟机运行，编译器 和 JVM 分别是 向前兼容 和 向后兼容 的。</p>
 <h1 id="Java-API-Code-Point"><a href="#Java-API-Code-Point" class="headerlink" title="Java API Code Point"></a>Java API Code Point</h1><p><strong>经过前面层层铺垫，我们发现 Code Point 这个东西其实就是一个数，即该字符在字符集中的 id。我们还可以把 Code Point 叫做 码点、字符代码、字符序号，反正都是同一个东西。</strong></p>
@@ -451,7 +451,7 @@ height:50vh;
 <p>打印 <code>name.codePoints()</code>：<code>[38149, 28809, 128055, 21670, 20022, 24696]</code> 。发现原因在于 🐷 emoji 的编码大于 65536，因此被放到两个 char 中存储，即占用四字节。</p>
 <p>具体的拼装操作在 <code>java.lang.Character#codePointAtImpl</code> 。</p>
 <p>其中把两个 char 拼成一个 Code Point 的操作如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">toCodePoint</span><span class="params">(<span class="keyword">char</span> high, <span class="keyword">char</span> low)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Optimized form of:</span></span><br><span class="line">    <span class="comment">// return ((high - MIN_HIGH_SURROGATE) &lt;&lt; 10)</span></span><br><span class="line">    <span class="comment">//         + (low - MIN_LOW_SURROGATE)</span></span><br><span class="line">    <span class="comment">//         + MIN_SUPPLEMENTARY_CODE_POINT;</span></span><br><span class="line">    <span class="keyword">return</span> ((high &lt;&lt; <span class="number">10</span>) + low) + (MIN_SUPPLEMENTARY_CODE_POINT</span><br><span class="line">                                   - (MIN_HIGH_SURROGATE &lt;&lt; <span class="number">10</span>)</span><br><span class="line">                                   - MIN_LOW_SURROGATE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java.lang.Character#toCodePoint</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">toCodePoint</span><span class="params">(<span class="keyword">char</span> high, <span class="keyword">char</span> low)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Optimized form of:</span></span><br><span class="line">    <span class="comment">// return ((high - MIN_HIGH_SURROGATE) &lt;&lt; 10)</span></span><br><span class="line">    <span class="comment">//         + (low - MIN_LOW_SURROGATE)</span></span><br><span class="line">    <span class="comment">//         + MIN_SUPPLEMENTARY_CODE_POINT;</span></span><br><span class="line">    <span class="keyword">return</span> ((high &lt;&lt; <span class="number">10</span>) + low) + (MIN_SUPPLEMENTARY_CODE_POINT</span><br><span class="line">                                   - (MIN_HIGH_SURROGATE &lt;&lt; <span class="number">10</span>)</span><br><span class="line">                                   - MIN_LOW_SURROGATE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>Ref:</p>
 <p><a href="https://zhuanlan.zhihu.com/p/29318105" target="_blank" rel="noopener">给妹子讲python-S01E07字符编码历史观-从ASCII到Unicode</a></p>
@@ -466,7 +466,7 @@ height:50vh;
             <p>原文作者：<a href="http://blog.boileryao.com">Xiangyu Yao</a>
             <p>原文链接：<a href="http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/">http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/</a>
             <p>发表日期：<a href="http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/">November 27th 2018, 10:35:44 am</a>
-            <p>更新日期：<a href="http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/">November 29th 2018, 2:43:34 pm</a>
+            <p>更新日期：<a href="http://blog.boileryao.com/2018/11/java-encoding-and-whats-codepoint/">November 29th 2018, 2:47:27 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -808,6 +808,20 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -931,33 +945,33 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Programming Language"><span class="iconfont-archer">&#xe606;</span>Programming Language</span>
     
-        <span class="sidebar-tag-name" data-tags="Open Source"><span class="iconfont-archer">&#xe606;</span>Open Source</span>
-    
-        <span class="sidebar-tag-name" data-tags="Doc"><span class="iconfont-archer">&#xe606;</span>Doc</span>
-    
         <span class="sidebar-tag-name" data-tags="Android"><span class="iconfont-archer">&#xe606;</span>Android</span>
     
         <span class="sidebar-tag-name" data-tags="IPC"><span class="iconfont-archer">&#xe606;</span>IPC</span>
     
         <span class="sidebar-tag-name" data-tags="Translation"><span class="iconfont-archer">&#xe606;</span>Translation</span>
     
-        <span class="sidebar-tag-name" data-tags="Career"><span class="iconfont-archer">&#xe606;</span>Career</span>
-    
         <span class="sidebar-tag-name" data-tags="Software Engineering"><span class="iconfont-archer">&#xe606;</span>Software Engineering</span>
     
-        <span class="sidebar-tag-name" data-tags="VCS"><span class="iconfont-archer">&#xe606;</span>VCS</span>
+        <span class="sidebar-tag-name" data-tags="Open Source"><span class="iconfont-archer">&#xe606;</span>Open Source</span>
     
-        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
+        <span class="sidebar-tag-name" data-tags="Doc"><span class="iconfont-archer">&#xe606;</span>Doc</span>
+    
+        <span class="sidebar-tag-name" data-tags="Career"><span class="iconfont-archer">&#xe606;</span>Career</span>
+    
+        <span class="sidebar-tag-name" data-tags="VCS"><span class="iconfont-archer">&#xe606;</span>VCS</span>
     
         <span class="sidebar-tag-name" data-tags="Java"><span class="iconfont-archer">&#xe606;</span>Java</span>
     
         <span class="sidebar-tag-name" data-tags="Encoding"><span class="iconfont-archer">&#xe606;</span>Encoding</span>
     
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
         <span class="sidebar-tag-name" data-tags="Networking"><span class="iconfont-archer">&#xe606;</span>Networking</span>
     
-        <span class="sidebar-tag-name" data-tags="Rx"><span class="iconfont-archer">&#xe606;</span>Rx</span>
+        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
-        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+        <span class="sidebar-tag-name" data-tags="Rx"><span class="iconfont-archer">&#xe606;</span>Rx</span>
     
         <span class="sidebar-tag-name" data-tags="Arch"><span class="iconfont-archer">&#xe606;</span>Arch</span>
     
