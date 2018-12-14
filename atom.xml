@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.boileryao.com/"/>
-  <updated>2018-11-29T06:53:20.714Z</updated>
+  <updated>2018-12-14T07:06:49.338Z</updated>
   <id>http://blog.boileryao.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PowerShell 养老配置</title>
+    <link href="http://blog.boileryao.com/2018/12/powershell-oldman-config/"/>
+    <id>http://blog.boileryao.com/2018/12/powershell-oldman-config/</id>
+    <published>2018-12-14T06:13:12.000Z</published>
+    <updated>2018-12-14T07:06:49.338Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;迫于看不懂&lt;code&gt;arsc&lt;/code&gt; 文件，又开始倒腾 &lt;code&gt;PowerShell&lt;/code&gt; 玩了，老年人专用配置。大概就是换了换字体，装了个 &lt;code&gt;oh-my-posh&lt;/code&gt; ，然后顺便把系统编码改回了 &lt;code&gt;Unicode UTF8&lt;/code&gt;  （逃&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2018/12/powershell-oldman-config/header.png&quot; alt=&quot;效果图&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Environment" scheme="http://blog.boileryao.com/tags/Environment/"/>
+    
+      <category term="Shell" scheme="http://blog.boileryao.com/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Java 的字符编解码及CodePoint</title>
