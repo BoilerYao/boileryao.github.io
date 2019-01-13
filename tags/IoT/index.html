@@ -22,7 +22,7 @@
     <meta name="description" content="勿苟安当下，勿忘前进之步伐">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Hamming Weight, 一个串中非零元素的个数 · 奔跑的锅炉</title>
+    <title>奔跑的锅炉</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,23 +203,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >闭门造车姚师傅</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">Hamming Weight, 一个串中非零元素的个数</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>闭门造车姚师傅</a>
 </header>
@@ -231,74 +220,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            Hamming Weight, 一个串中非零元素的个数
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                    <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Algorithm">Algorithm</a>
-    
-</div>
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2017/03/04</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -399,194 +338,41 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <p>汉明重量是一串符号中非零符号的个数，在最为常见的数据位符号串中，它是1的个数。</p>
-<p>操作简单，贴近底层，在包括信息论、编码理论、密码学等多个领域都有应用。</p>
-<p>Java中有Integer.bitCount()的实现。</p>
-<a id="more"></a>
-<p>发现这个问题源于LeetCode上的一个问题，<a href="https://leetcode.com/problems/counting-bits/?tab=Description" target="_blank" rel="noopener">bitCount</a>。要求给定一个上界，输出从0到该上界的范围内所有数的二进制表示中1的个数，时间复杂度为O(n)。这就要求处理每个数的二进制表示的时间复杂度为O(1)。用循环显然是不可能了，循环相除的时间复杂度为O(logN)。所以，应该把思路放到位运算上。</p>
-<h3 id="bitCount实现"><a href="#bitCount实现" class="headerlink" title="bitCount实现"></a>bitCount实现</h3><p>Java中bitCount的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bitCount</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// HD, Figure 5-2</span></span><br><span class="line">    i = i - ((i &gt;&gt;&gt; <span class="number">1</span>) &amp; <span class="number">0x55555555</span>);</span><br><span class="line">    i = (i &amp; <span class="number">0x33333333</span>) + ((i &gt;&gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x33333333</span>);</span><br><span class="line">    i = (i + (i &gt;&gt;&gt; <span class="number">4</span>)) &amp; <span class="number">0x0f0f0f0f</span>;</span><br><span class="line">    i = i + (i &gt;&gt;&gt; <span class="number">8</span>);</span><br><span class="line">    i = i + (i &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">    <span class="keyword">return</span> i &amp; <span class="number">0x3f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><p>表格来自Wikipedia，<a href="https://zh.wikipedia.org/wiki/%E6%B1%89%E6%98%8E%E9%87%8D%E9%87%8F" target="_blank" rel="noopener">汉明重量</a>。</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>二进制</th>
-<th>十进制</th>
-<th>注释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>0110110010111010</td>
-<td></td>
-<td>原始数据</td>
-</tr>
-<tr>
-<td>B = A &amp; 01 01 01 01 01 01 01 01</td>
-<td>01 00 01 00 00 01 00 00</td>
-<td>1,0,1,0,0,1,0,0</td>
-<td>A隔一位检验</td>
-</tr>
-<tr>
-<td>C = (A &gt;&gt; 1) &amp; 01 01 01 01 01 01 01 01</td>
-<td>00 01 01 00 01 01 01 01</td>
-<td>0,1,1,0,1,1,1,1</td>
-<td>A中剩余的数据位</td>
-</tr>
-<tr>
-<td>D = B + C</td>
-<td>01 01 10 00 01 10 01 01</td>
-<td>1,1,2,0,1,2,1,1</td>
-<td>A中每个双位段中1的个数列表</td>
-</tr>
-<tr>
-<td>E = D &amp; 0011 0011 0011 0011</td>
-<td>0001 0000 0010 0001</td>
-<td>1,0,2,1</td>
-<td>D中数据隔一位检验</td>
-</tr>
-<tr>
-<td>F = (D &gt;&gt; 2) &amp; 0011 0011 0011 0011</td>
-<td>0001 0010 0001 0001</td>
-<td>1,2,1,1</td>
-<td>D中剩余数据的计算</td>
-</tr>
-<tr>
-<td>G = E + F</td>
-<td>0010 0010 0011 0010</td>
-<td>2,2,3,2</td>
-<td>A中4位数据段中1的个数列表</td>
-</tr>
-<tr>
-<td>H = G &amp; 00001111 00001111</td>
-<td>00000010 00000010</td>
-<td>2,2</td>
-<td>G中隔一位检验</td>
-</tr>
-<tr>
-<td>I = (G &gt;&gt; 4) &amp; 00001111 00001111</td>
-<td>00000010 00000011</td>
-<td>2,3</td>
-<td>G中剩余数据的计算</td>
-</tr>
-<tr>
-<td>J = H + I</td>
-<td>00000100 00000101</td>
-<td>4,5</td>
-<td>A中8位数据段中1的个数列表</td>
-</tr>
-<tr>
-<td>K = J &amp; 0000000011111111</td>
-<td>0000000000000101</td>
-<td>5</td>
-<td>J中隔一位检验</td>
-</tr>
-<tr>
-<td>L = (J &gt;&gt; 8) &amp; 0000000011111111</td>
-<td>0000000000000100</td>
-<td>4</td>
-<td>J中剩余数据的检验</td>
-</tr>
-<tr>
-<td>M = K + L</td>
-<td>0000000000001001</td>
-<td>9</td>
-<td>最终答案</td>
-</tr>
-</tbody>
-</table>
-<h3 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h3><h4 id="1-二进制编码"><a href="#1-二进制编码" class="headerlink" title="1.二进制编码"></a>1.二进制编码</h4><p>我们用的二进制编码是有权重的，也就是出现在不同位置的1对这个数大小的影响是不一样的。通常来说，从右向左（从0开始计数）的权重分别是<br>$$<br>2^n<br>$$<br>比如，对于一个4bit的二进制数<code>1111</code>，从右向左的四个1的权重分别为<code>[1, 2, 4, 8]</code>。 </p>
-<h4 id="2-把各位的权重统一至1"><a href="#2-把各位的权重统一至1" class="headerlink" title="2.把各位的权重统一至1"></a>2.把各位的权重统一至1</h4><p>显然，如果一个二进制表示权重都是为1的话，一个数的表示就由<code>sum:a[n]*2^n</code>变为<code>sum:a[n]*2^0</code>即<code>sum:a[n]</code>。这种表示，也正是我们数数的方式。</p>
-<p>需要做的就是把各个独立的位组合起来。在接下来，我们用表格中新增加的符号来表示对应的步骤。</p>
-<ul>
-<li><p>步骤A</p>
-<p>初始状态，十进制就是完全拆开的二进制。显然，把16个十进制加起来就是最终的结果。</p>
-</li>
-<li><p>步骤B、C</p>
-<p>对每两位进行“交运算”</p>
-<ul>
-<li>交01，得到偶数位的十进制表示，这里十进制的数目只有步骤A的一半了</li>
-<li>右移一位交01，（右移把一半的位降了一个权重），得到奇数位的十进制表示，是步骤A十进制表示的另一半</li>
-</ul>
-<p>经过步骤BC，成功将一组十进制进行了对分。</p>
-</li>
-<li><p>步骤D</p>
-<p>BC步骤得到两组十进制对应元素的权重是一样的，加起来。</p>
-<p>现在，十进制的数目是八位，只有一开始的一半了。</p>
-<p>这里十进制中的每个元素代表，二进制表示中每两位中的1的个数。</p>
-</li>
-</ul>
-<p>经过几次这样的操作，最终十进制的数目只有一位，即二进制表示中所有1的个数。就这样，bingo！</p>
-<hr>
-<p>Happy Coding  </p>
-<p>Ref:</p>
-<p>维基百科：<a href="https://zh.wikipedia.org/wiki/%E6%B1%89%E6%98%8E%E9%87%8D%E9%87%8F" target="_blank" rel="noopener">汉明重量</a></p>
-<p>LeetCode：<a href="https://leetcode.com/problems/counting-bits/?tab=Description" target="_blank" rel="noopener">bitCount</a></p>
-
-    </article>
-    <!-- license  -->
+            <main class="main index-page">
     
-        <div class="license-wrapper">
-            <p>原文作者：<a href="http://blog.boileryao.com">Xiangyu Yao</a>
-            <p>原文链接：<a href="http://blog.boileryao.com/2017/03/hamming-weight/">http://blog.boileryao.com/2017/03/hamming-weight/</a>
-            <p>发表日期：<a href="http://blog.boileryao.com/2017/03/hamming-weight/">March 4th 2017, 7:09:02 pm</a>
-            <p>更新日期：<a href="http://blog.boileryao.com/2017/03/hamming-weight/">October 27th 2017, 8:22:58 pm</a>
-            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2019/01/android-ble-overview/" >
+            
+                <span>低功耗蓝牙 Overview</span>
+        </a>
+        <div class="abstract-content">
+            <p>最近来 Keep 了，做智能设备相关的工作，所以认真看了看 BLE （低功耗蓝牙）的文档。这篇文章的内容几乎全部来源于 <a href="https://developer.android.com/guide/topics/connectivity/bluetooth-le" target="_blank" rel="noopener">https://developer.android.com/guide/topics/connectivity/bluetooth-le</a>，现在相当于直接 <code>fork</code> 一份，以后可能会慢慢加些其他的内容。这篇文档的示例代码比较学院派，或者叫比较 <code>Sofeware Engineering</code> 可能要用稍微长一些的时间看。</p>
         </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "IoT">IoT</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2017/03/hackers-and-painters-log/" title= "黑客与画家，Big Ideas from the Computer Age">
-                    <div class="nextTitle">黑客与画家，Big Ideas from the Computer Age</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-                <div class="prevSlogan">Previous Post</div>
-                <a href= "/2016/10/semitranslate-android-sharing-simple/" title= "[意译] Android-分享一些简单的数据">
-                    <div class="prevTitle">[意译] Android-分享一些简单的数据</div>
-                </a>
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
-    
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <div id="comment"></div>
-    <script>
-    new Valine({
-        el: '#comment' ,
-        notify:false, 
-        verify:false, 
-        appId: "tbNcKzv5LFi1kz9g4YffERjA-gzGzoHsz",
-        appKey: "FMP9ubOFve88nYzy4lcpfP7G",
-        placeholder: "",
-        path:window.location.pathname, 
-        avatar:'mm' 
-    });
-    </script>
-
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -680,24 +466,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#bitCount实现"><span class="toc-number">1.</span> <span class="toc-text">bitCount实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单示例"><span class="toc-number">2.</span> <span class="toc-text">简单示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理解释"><span class="toc-number">3.</span> <span class="toc-text">原理解释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-二进制编码"><span class="toc-number">3.1.</span> <span class="toc-text">1.二进制编码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-把各位的权重统一至1"><span class="toc-number">3.2.</span> <span class="toc-text">2.把各位的权重统一至1</span></a></li></ol></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1194,8 +962,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
