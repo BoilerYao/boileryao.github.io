@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.boileryao.com/"/>
-  <updated>2019-01-13T16:47:54.964Z</updated>
+  <updated>2019-01-27T16:00:35.364Z</updated>
   <id>http://blog.boileryao.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Studio 代理配置指南</title>
+    <link href="http://blog.boileryao.com/2019/01/config-android-studio-proxy/"/>
+    <id>http://blog.boileryao.com/2019/01/config-android-studio-proxy/</id>
+    <published>2019-01-27T15:26:08.000Z</published>
+    <updated>2019-01-27T16:00:35.364Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Studio 用户的代理配置指南，真正有效的 gradle 代理配置方式。#依赖拉不下来真让人自闭，不想再一遍又一遍自闭了，所以记下来。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Wiki" scheme="http://blog.boileryao.com/tags/Wiki/"/>
+    
+  </entry>
   
   <entry>
     <title>低功耗蓝牙 Overview</title>
@@ -395,27 +413,6 @@
     
     
       <category term="Algorithm" scheme="http://blog.boileryao.com/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[意译] Android-分享一些简单的数据</title>
-    <link href="http://blog.boileryao.com/2016/10/semitranslate-android-sharing-simple/"/>
-    <id>http://blog.boileryao.com/2016/10/semitranslate-android-sharing-simple/</id>
-    <published>2016-10-22T09:22:17.000Z</published>
-    <updated>2018-11-20T15:39:12.877Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;原文地址：&lt;a href=&quot;https://developer.android.com/training/sharing/send.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Sending Simple Data to Other Apps&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;​    当你建立一个Intent的时候，你必须指定这个Intent可以触发的Action。Android定义了一些Action，包括&lt;em&gt;ACTION_SEND&lt;/em&gt;，就像它的字面意思，这个Intent是从当前Activity发送数据到另一个Activity，甚至是别的进程的里的Activity。如果想在Activity之间传送数据的话，你需要做的仅仅是指定&lt;em&gt;数据&lt;/em&gt;以及它的&lt;em&gt;类型&lt;/em&gt;。系统就会寻找可以接收的Activity，并且直接启动这个Activity，如果有很多个Activity都被认为可以处理这些数据，系统则显示一个包含这些Activity的列表。同样，你也可以在manifest文件中声明你的Activity可以从其他应用中接收什么数据。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Android" scheme="http://blog.boileryao.com/tags/Android/"/>
-    
-      <category term="Doc" scheme="http://blog.boileryao.com/tags/Doc/"/>
     
   </entry>
   

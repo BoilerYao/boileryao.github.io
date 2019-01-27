@@ -78,8 +78,6 @@
     <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            闭门造车姚师傅
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                Something beyonds the code
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,235 +359,18 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2017/11/viewmodel-livedata-pattens-and-antipatterns/" >
+        <a class="abstract-title" href = "/2016/10/semitranslate-android-sharing-simple/" >
             
-                <span>ViewModel 和 LiveData：为设计模式打 Call 还是唱反调？</span>
+                <span>[意译] Android-分享一些简单的数据</span>
         </a>
         <div class="abstract-content">
-            <p>Google 在今年（2017年）的 IO 大会上发布了 Android Architecture Component ，其中的 ViewModel 、LiveData 和 Room 等等都让人眼前一亮。本文介绍了 ViewModel 和 LiveData 对现有的 Android APP 架构和设计模式可能带来的一些利弊。大概算是阳春白雪吧，orz，orz，orz</p>
+            <p>原文地址：<a href="https://developer.android.com/training/sharing/send.html" target="_blank" rel="noopener">Sending Simple Data to Other Apps</a></p>
+<p>​    当你建立一个Intent的时候，你必须指定这个Intent可以触发的Action。Android定义了一些Action，包括<em>ACTION_SEND</em>，就像它的字面意思，这个Intent是从当前Activity发送数据到另一个Activity，甚至是别的进程的里的Activity。如果想在Activity之间传送数据的话，你需要做的仅仅是指定<em>数据</em>以及它的<em>类型</em>。系统就会寻找可以接收的Activity，并且直接启动这个Activity，如果有很多个Activity都被认为可以处理这些数据，系统则显示一个包含这些Activity的列表。同样，你也可以在manifest文件中声明你的Activity可以从其他应用中接收什么数据。</p>
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Translation">Translation</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Arch">Arch</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/10/covariance-and-contravariance-in-kotlin/" >
-            
-                <span>Covariance and Contravariance in Kotlin</span>
-        </a>
-        <div class="abstract-content">
-            <p>What is the hell of invariance, covariance and contravariance in Kotlin , and why this happen. It’s also helpful for understanding wildcast in Java.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Kotlin">Kotlin</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Programming Language">Programming Language</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/git-rebase/" >
-            
-                <span>Git 中的 rebase, 变基！</span>
-        </a>
-        <div class="abstract-content">
-            <p>Rebase, what is rebase and what advantage can we take using rebase before merge than merging directly. Read more for details. These contents come from <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" target="_blank" rel="noopener">a part of <strong><em>pro-git</em></strong></a>, and you can get the entire book from links in this link.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VCS">VCS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/06/design-pattern-kotlin/" >
-            
-                <span>[译] 当设计模式遇上 Kotlin</span>
-        </a>
-        <div class="abstract-content">
-            <p>设计模式进行时，Kotlin。</p>
-<p>设计模式本来就是构造了一些编程语言不原生支持的范式，作为一个年轻的语言，这些苦 Java 久矣的开发者做了些啥呢。<a href="https://juejin.im/post/594b2ac00ce4630057425bd5" target="_blank" rel="noopener">链接</a></p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Translation">Translation</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Software Engineering">Software Engineering</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/05/poly-constructor/" >
-            
-                <span>Polymorphism, the perspective of construct</span>
-        </a>
-        <div class="abstract-content">
-            <p>When polymorphism meet initialization of an object, what will happen.</p>
-<p>Here is a pretty strange but reasonable example.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Java">Java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/04/rxjava2-java8-wtf/" >
-            
-                <span>[译] 大战 RxJava2 和 Java8 Stream [ Android RxJava2 ] （这到底是什么） 第四部分</span>
-        </a>
-        <div class="abstract-content">
-            <p>学习函数式编程的一系列文章，这是第四部分，其他部分文内有链接。</p>
-<p>怎么说呢，翻这篇的时候真的很痛苦，作者的表达很 America ，而且很俏皮和“详细”。当时我还是有些侧重直译的，然后就很尴尬。不过整篇文章还是很好明白的，map/filter 的概念讲得很清晰，很适合入门。<a href="https://juejin.im/post/58f44a705c497d006c95436b" target="_blank" rel="noopener">链接</a></p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Translation">Translation</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Rx">Rx</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/04/flying-solo-with-android-development/" >
-            
-                <span>[译]一个人的 Android 开发</span>
-        </a>
-        <div class="abstract-content">
-            <p>一个人就是一个团队，作者就是这种情况。当周围没有一样一样的小伙伴，是好是坏，怎么才能更好地提升自己呢？作者经过实践给出了几条建议，使用 Kotlin，正面刚设计师的 iOS 设计稿，嗯！</p>
-<p><img class="progressiveMedia-noscript js-progressiveMedia-inner" src="https://cdn-images-1.medium.com/max/800/1*gqA2o9GN2tU2xaIMuddXJg.jpeg"></p>
-<p>Photo credit : <a href="http://www.magic4walls.com/crop-image?id=14269" target="_blank" rel="noopener">http://www.magic4walls.com/crop-image?id=14269</a> </p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Translation">Translation</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Career">Career</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/03/android-ipc-service-messsenger/" >
-            
-                <span>Android IPC之 Service和Messenger</span>
-        </a>
-        <div class="abstract-content">
-            <p>IPC机制是Android的重要组成部分，本文介绍其中的Service和Messenger。结合模拟的支付调用作为例子，翔实明了，简直不能再良心。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/12</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/10/22</span>
             </div>
             <!-- tags  -->
             
@@ -582,68 +378,7 @@
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Android">Android</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "IPC">IPC</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/03/hackers-and-painters-log/" >
-            
-                <span>黑客与画家，Big Ideas from the Computer Age</span>
-        </a>
-        <div class="abstract-content">
-            <p>如何好奇地探索这个世界，做喜欢的事情。不讲细节不摆资历不讲大道理不写小说不吹牛。(阳志平@豆瓣)</p>
-<p>Hackers and Painters, Big Ideas from the Computer Age</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Reading">Reading</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/03/hamming-weight/" >
-            
-                <span>Hamming Weight, 一个串中非零元素的个数</span>
-        </a>
-        <div class="abstract-content">
-            <p>汉明重量是一串符号中非零符号的个数，在最为常见的数据位符号串中，它是1的个数。</p>
-<p>操作简单，贴近底层，在包括信息论、编码理论、密码学等多个领域都有应用。</p>
-<p>Java中有Integer.bitCount()的实现。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/04</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Algorithm">Algorithm</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Doc">Doc</a>
     
 </div>
             
@@ -653,11 +388,127 @@
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">NEXT &#62;</a>
+        <a class="extend prev" rel="prev" href="/page/2/">&#60; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
     
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src= /avatar/icon_head.jpg >
+    <div class="profile-name">boileryao</div>
+    
+    <div class="profile-signature">
+        勿苟安当下，勿忘前进之步伐。
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:boileryao+blog@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/boileryao" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://t.me/boileryao" class="iconfont-archer telegram" target="_blank" title=telegram></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://juejin.im/user/57528b53816dfa005f6a458f" class="iconfont-archer juejin" target="_blank" title=juejin></a>
+            
+        
+    
+        
+            
+                <a href="https://www.v2ex.com/member/boileryao" class="iconfont-archer v2ex" target="_blank" title=v2ex></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href= http://www.saberismywife.com target="_black">SaberDa</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href= http://blog.ciaran.cn/ target="_black">Ciaran's Gondolin</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href= http://tobiaslee.top/ target="_black">TobiasLee</a>
+                    </span>
+                
+            
+                
+                    <span>
+                        <a href= http://www.three7.cc/ target="_black">叁拾柒</a>
+                    </span>
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href = "/about" >ABOUT ME</a>
+        </div>
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">
