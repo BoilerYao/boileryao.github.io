@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.boileryao.com/"/>
-  <updated>2019-01-27T16:00:35.364Z</updated>
+  <updated>2019-12-31T14:51:11.803Z</updated>
   <id>http://blog.boileryao.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>YEAR OF 2019</title>
+    <link href="http://blog.boileryao.com/2019/12/year-of-2019/"/>
+    <id>http://blog.boileryao.com/2019/12/year-of-2019/</id>
+    <published>2019-12-31T14:39:54.000Z</published>
+    <updated>2019-12-31T14:51:11.803Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2020，世界和平。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Milestone" scheme="http://blog.boileryao.com/tags/Milestone/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Studio 代理配置指南</title>
@@ -393,26 +411,6 @@
     
     
       <category term="Reading" scheme="http://blog.boileryao.com/tags/Reading/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hamming Weight, 一个串中非零元素的个数</title>
-    <link href="http://blog.boileryao.com/2017/03/hamming-weight/"/>
-    <id>http://blog.boileryao.com/2017/03/hamming-weight/</id>
-    <published>2017-03-04T11:09:02.000Z</published>
-    <updated>2017-10-27T12:22:58.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;汉明重量是一串符号中非零符号的个数，在最为常见的数据位符号串中，它是1的个数。&lt;/p&gt;
-&lt;p&gt;操作简单，贴近底层，在包括信息论、编码理论、密码学等多个领域都有应用。&lt;/p&gt;
-&lt;p&gt;Java中有Integer.bitCount()的实现。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Algorithm" scheme="http://blog.boileryao.com/tags/Algorithm/"/>
     
   </entry>
   
